@@ -1,6 +1,7 @@
 let carrito = [];
 let eleccionPS5 = true;
 let eleccionPS4 = true;
+let seguirComprando = false;
 let eleccionJuego = "";
 let eleccionConsola = "";
 
@@ -9,36 +10,65 @@ function consultaConsola() {
     alert("Bienvenidos a PSstoreCaballito");
     
     do{
+
         eleccionConsola = prompt('Seleccione una consola(PS5 o PS4)')
-        if(eleccionConsola == null){
-            alert("Por favor seleccionar una opcion");
+
+        switch(eleccionConsola){
+            case "PS5":
+                alert("Usted a elegido PS5, continuemos")
+                break;
+            
+            case "PS4":
+                alert("Usted a elegido PS4, continuemos")
+                break;
+
+            default:
+                alert("Por favor seleccionar una de las opciones(PS5 o PS4), proximamente mas opciones")
+                break;
+        
         }
-        console.log(eleccionConsola)
-    }while(eleccionConsola == null);
+
+    }while(eleccionConsola != "PS5" && eleccionConsola != "PS4")
+
     return;
         
 }
 
 function agregarCarrito(){
+    
     do{
+
         eleccionJuego = prompt('Seleccione el juego(GTA4 o GTA5)')
-        if (eleccionJuego == "GTA4"){
-            cantidad = prompt('¿Cuantas unidades queres?')
-            for (let i = 0; i < cantidad; i++){
-                carrito.push({juego:'GTA4', precio: 20});
-            }
-            console.log(carrito.length)    
+
+        switch(eleccionJuego){
+            case "GTA4":
+                cantidad = prompt('¿Cuantas unidades queres?')
+                for (let i = 0; i < cantidad; i++){
+                    carrito.push({juego:'GTA4', precio: 20});
+                }
+                console.log(carrito.length)
+                seguirComprando = confirm("¿Queres seguir comprando?")
+                break;
+            
+            case "GTA5":
+                cantidad = prompt('¿Cuantas unidades queres?')
+                for (let i = 0; i < cantidad; i++){
+                    carrito.push({juego:'GTA5', precio: 30});
+                }
+                console.log(carrito.length)
+                seguirComprando = confirm("¿Queres seguir comprando?")
+                break;
+
+            default:
+                alert("Por favor seleccionar una de las opciones(GTA4 o GTA5), proximamente mas opciones")
+                console.log(eleccionJuego)
+                break;
         }
-        else{
-            cantidad = prompt('¿Cuantas unidades queres?')
-            for (let i = 0; i < cantidad; i++){
-                carrito.push({juego:'GTA5', precio: 30});
-            }
-            console.log(carrito.length)    
-        }
-        seguirComprando = confirm("¿Queres seguir comprando?")
-    }while(seguirComprando == true)
-    console.table(carrito)
+
+    }while(seguirComprando == true || eleccionJuego != "GTA4" && eleccionJuego != "GTA5")
+
+    console.table(carrito);
+    return;
 }
 
 function calcularTotal(){
@@ -61,7 +91,7 @@ function compra(total){
     else{
         carrito = []
         console.table(carrito)
-        alert("el carrito se a vaciado")
+        alert("El carrito se a vaciado")
     }
     
 
